@@ -187,7 +187,10 @@ class _HomeViewState extends State<HomeView> {
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20),
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.45,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(25)),
+        ),
+        height: MediaQuery.of(context).size.height * 0.6,
         child: ListView.separated(
             separatorBuilder: (context, index) => SizedBox(height: 20),
             itemCount: snapshot.data.data.tournaments.length,
