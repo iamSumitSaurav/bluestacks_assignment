@@ -8,7 +8,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  bool _isButtonDisabled = false;
+  bool _isButtonDisabled;
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -92,7 +92,7 @@ class _LoginViewState extends State<LoginView> {
                               fontWeight: FontWeight.bold)),
                     ),
                   ),
-                  onPressed: _isButtonDisabled
+                  onPressed: _disableFeature()
                       ? null
                       : () {
                           if (_authenticated()[0]) {
@@ -110,6 +110,22 @@ class _LoginViewState extends State<LoginView> {
         ],
       ),
     );
+  }
+
+  bool _disableFeature() {
+    if (usernameController.text.length < 3 ||
+        usernameController.text.length > 10 ||
+        passwordController.text.length < 3 ||
+        passwordController.text.length > 10) {
+      print("button disabled");
+      setState(() {
+        _isButtonDisabled = true;
+      });
+    } else {
+      print("button enabled");
+      _isButtonDisabled = false;
+    }
+    return _isButtonDisabled;
   }
 
   String _credValidator(String value) {
